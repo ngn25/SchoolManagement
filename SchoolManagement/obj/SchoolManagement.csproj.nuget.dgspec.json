@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\CrudApi\\CrudApi.csproj": {}
+    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\CrudApi\\CrudApi.csproj": {
+    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\CrudApi\\CrudApi.csproj",
-        "projectName": "CrudApi",
-        "projectPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\CrudApi\\CrudApi.csproj",
+        "projectUniqueName": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj",
+        "projectName": "SchoolManagement",
+        "projectPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj",
         "packagesPath": "C:\\Users\\n.mousavi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\CrudApi\\obj\\",
+        "outputPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\n.mousavi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -47,26 +47,6 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[10.0.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[10.0.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[10.0.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[10.0.1, )"
             }
           },
           "imports": [
