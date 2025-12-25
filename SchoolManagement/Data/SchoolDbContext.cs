@@ -1,22 +1,14 @@
 
 using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Model;
+using SchoolManagement.Domain.Model;
 
 namespace  SchoolManagement.Data
 {
-    public class SchoolDbContext : DbContext
+    public class SchoolDbContext(DbContextOptions<SchoolDbContext> options) : DbContext(options)
     {
-        public SchoolDbContext(DbContextOptions<SchoolDbContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Teacher> Teachers { get; set; } = null!;
         public DbSet<Course> Courses { get; set; } = null!;
-
-
-
         public DbSet<CourseStudent> CourseStudents { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +25,7 @@ namespace  SchoolManagement.Data
             modelBuilder.Entity<CourseStudent>()
                 .HasOne(cs => cs.Course)
                 .WithMany(c => c.CourseStudents)
-                .HasForeignKey(cs => cs.CourseId);
+                .HasForeignKey(cs => cs.Course.Id);
 
             modelBuilder.Entity<CourseStudent>()
                 .HasOne(cs => cs.Student)

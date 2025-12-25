@@ -3815,24 +3815,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\n.mousavi\\.nuget\\packages\\": {}
+    "C:\\Users\\Negin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj",
+      "projectUniqueName": "C:\\Users\\Negin\\Desktop\\schoolM\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
       "projectName": "SchoolManagement",
-      "projectPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement.csproj",
-      "packagesPath": "C:\\Users\\n.mousavi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\obj\\",
+      "projectPath": "C:\\Users\\Negin\\Desktop\\schoolM\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
+      "packagesPath": "C:\\Users\\Negin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Negin\\Desktop\\schoolM\\SchoolManagement\\SchoolManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\n.mousavi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Negin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
