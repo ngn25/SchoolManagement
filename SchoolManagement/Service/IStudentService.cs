@@ -9,5 +9,7 @@ namespace SchoolManagement.Service
         void Update(Student student);
 
         void Delete(int Id);
+        
+        bool Exists(int? Id);
     }
 }

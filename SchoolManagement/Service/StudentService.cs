@@ -6,8 +6,6 @@ namespace SchoolManagement.Service
 {
     public class StudentService(SchoolDbContext context) : IStudentService
     {
-        private readonly SchoolDbContext context = context;
-
         public void Add(Student student)
         {
             if (student == null || student.Id != null)
@@ -39,7 +37,7 @@ namespace SchoolManagement.Service
             context.SaveChanges();
         }
 
-        private bool Exists(int? Id)
+        public bool Exists(int? Id)
         {
             return context.Students.Any(s => s.Id == Id);
         }

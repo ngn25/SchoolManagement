@@ -6,8 +6,6 @@ namespace SchoolManagement.Service
 {
     public class TeacherService(SchoolDbContext context) : ITeacherservice
     {
-        private readonly SchoolDbContext context = context;
-
         public void Add(Teacher teacher)
         {
             if (teacher == null || teacher.Id != null)
@@ -19,39 +17,29 @@ namespace SchoolManagement.Service
             context.SaveChanges();
         }
 
-        public void Update(Student student)
+        public void Update(Teacher teacher)
         {
-            if (student == null || student.Id == null)
+            if (teacher == null || teacher.Id == null)
             {
                 return;
             }
-            if (!Exists(student.Id))
+            if (!Exists(teacher.Id))
             {
                 return;
             }
-            context.Students.Update(student);
+            context.Teachers.Update(teacher);
             context.SaveChanges();
         }
 
         public void Delete(int Id)
         {
-            context.Students.Where(s => s.Id == Id).ExecuteDelete();
+            context.Teachers.Where(t => t.Id == Id).ExecuteDelete();
             context.SaveChanges();
         }
 
-        private bool Exists(int? Id)
+        public bool Exists(int? Id)
         {
-            return context.Students.Any(s => s.Id == Id);
-        }
-
-        public void Add(Teacher teacher)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Teacher teacher)
-        {
-            throw new NotImplementedException();
+            return context.Teachers.Any(t => t.Id == Id);
         }
     }
 }
