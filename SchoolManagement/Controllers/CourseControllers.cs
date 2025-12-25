@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using SchoolManagement.Service;
 using SchoolManagement.Domain.dto;
+using SchoolManagement.Service;
 
 namespace SchoolManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController(IStudentService _service) : ControllerBase
-    {
+    public class CourseController(ICourseService _service) : ControllerBase
+    {   
         [HttpPost]
-        public IActionResult Add(StudentDto studentDto) 
+        public IActionResult Add(CourseDto courseDto) 
         { 
-            _service.Add(studentDto.ToModel()); 
-            return Ok(studentDto); 
+            _service.Add(courseDto.ToModel()); 
+            return Ok(courseDto); 
         }
         
         [HttpPut]
-        public IActionResult Update(StudentDto studentDto)
+        public IActionResult Update(CourseDto courseDto)
         {
-            _service.Update(studentDto.ToModel());
-            return Ok(studentDto);
+            _service.Update(courseDto.ToModel());
+            return Ok(courseDto);
         } 
         
         [HttpDelete("{id}")]

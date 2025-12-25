@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Domain.dto;
-using SchoolManagement.Domain.Model;
 using SchoolManagement.Service;
 
-namespace firstpr.Controllers
+namespace SchoolManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

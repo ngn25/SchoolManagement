@@ -8,6 +8,8 @@ namespace SchoolManagement.Domain.Model
         public int TeacherId { get; set; }        
         public Teacher? Teacher { get; set; }
 
+        public List<int> StudentIds { get; set; } = [];
+
         public List<CourseStudent> CourseStudents { get; set; } = [];
     }
 }

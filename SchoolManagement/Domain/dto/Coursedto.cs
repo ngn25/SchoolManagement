@@ -1,3 +1,4 @@
+using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Domain.dto
 {
@@ -9,6 +10,17 @@ namespace SchoolManagement.Domain.dto
 
         public int TeacherId { get; set; }
 
-        public List<string> StudentIds { get; set; } = [];
+        public List<int> StudentIds { get; set; } = [];
+
+        public Course ToModel()
+        {
+            return new()
+            {
+                Id = Id,
+                Name = Name,
+                TeacherId = TeacherId,
+                StudentIds = StudentIds
+            };
+        }
     }
 }
