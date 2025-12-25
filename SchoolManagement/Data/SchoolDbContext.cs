@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Domain.Model;
 
-namespace  SchoolManagement.Data
+namespace SchoolManagement.Data
 {
     public class SchoolDbContext(DbContextOptions<SchoolDbContext> options) : DbContext(options)
     {
@@ -13,6 +13,10 @@ namespace  SchoolManagement.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Course>().HasKey(c => c.Id);
+            modelBuilder.Entity<Student>().HasKey(s => s.Id);
+            modelBuilder.Entity<Teacher>().HasKey(t => t.Id);
+
             modelBuilder.Entity<Course>()
                 .HasOne(c => c.Teacher)
                 .WithMany(t => t.CoursesTaught)
@@ -25,7 +29,7 @@ namespace  SchoolManagement.Data
             modelBuilder.Entity<CourseStudent>()
                 .HasOne(cs => cs.Course)
                 .WithMany(c => c.CourseStudents)
-                .HasForeignKey(cs => cs.Course.Id);
+                .HasForeignKey(cs => cs.CourseId);
 
             modelBuilder.Entity<CourseStudent>()
                 .HasOne(cs => cs.Student)
