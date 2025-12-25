@@ -1,4 +1,6 @@
-namespace SchoolManagement.dto
+using SchoolManagement.Domain.Model;
+
+namespace SchoolManagement.Domain.dto
 {
     public class StudentDto
     {
@@ -7,5 +9,11 @@ namespace SchoolManagement.dto
         public DateOnly DateOfBirth { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+
+        public Student ToModel()
+        {
+            
+
+        }
     }
 }

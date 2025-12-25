@@ -1,4 +1,4 @@
-namespace SchoolManagement.Model
+namespace SchoolManagement.Domain.dto
 {
     public class TeacherDto
     {

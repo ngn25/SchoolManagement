@@ -1,5 +1,5 @@
 
-namespace SchoolManagement.dto
+namespace SchoolManagement.Domain.dto
 {
     public class CourseDto
     {
