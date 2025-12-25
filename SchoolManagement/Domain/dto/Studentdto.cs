@@ -12,8 +12,14 @@ namespace SchoolManagement.Domain.dto
 
         public Student ToModel()
         {
-            
-
+            return new()
+            {
+                Id=Id,
+                Name=Name,
+                DateOfBirth=DateOfBirth,
+                Email=Email,
+                PhoneNumber=PhoneNumber
+            };
         }
     }
 }
