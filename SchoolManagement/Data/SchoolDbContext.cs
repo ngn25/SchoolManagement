@@ -6,10 +6,10 @@ namespace SchoolManagement.Data
 {
     public class SchoolDbContext(DbContextOptions<SchoolDbContext> options) : DbContext(options)
     {
-        public DbSet<Student> Students { get; set; } = null!;
-        public DbSet<Teacher> Teachers { get; set; } = null!;
-        public DbSet<Course> Courses { get; set; } = null!;
-        public DbSet<CourseStudent> CourseStudents { get; set; } = null!;
+        public DbSet<Student> Students { get; set; } 
+        public DbSet<Teacher> Teachers { get; set; } 
+        public DbSet<Course> Courses { get; set; } 
+        public DbSet<CourseStudent> CourseStudents { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

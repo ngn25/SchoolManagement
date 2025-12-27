@@ -9,10 +9,10 @@ namespace SchoolManagement.Controllers
     public class CourseController(ICourseService _service) : ControllerBase
     {   
         [HttpPost]
-        public IActionResult Add(CourseDto courseDto) 
+        public IActionResult Add(AddCourseDto AddCourseDto) 
         { 
-            _service.Add(courseDto.ToModel()); 
-            return Ok(courseDto); 
+            _service.Add(AddCourseDto.ToModel()); 
+            return Ok(AddCourseDto); 
         }
         
         [HttpPut]

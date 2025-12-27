@@ -9,7 +9,7 @@ namespace SchoolManagement.Controllers
     public class TeacherController(ITeacherservice _service) : ControllerBase
     {   
         [HttpPost]
-        public IActionResult Add(TeacherDto teacherDto) 
+        public IActionResult Add(AddTeacherDto teacherDto) 
         { 
             _service.Add(teacherDto.ToModel()); 
             return Ok(teacherDto); 

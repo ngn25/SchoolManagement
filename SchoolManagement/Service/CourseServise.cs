@@ -20,6 +20,8 @@ namespace SchoolManagement.Service
             {
                 return;
             }
+
+            
             context.Courses.Add(course);
             context.SaveChanges();
         }
