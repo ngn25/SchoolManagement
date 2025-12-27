@@ -29,6 +29,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+try
+{
+    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+    {
+        FileName = "http://localhost:5119/swagger/index.html",
+        UseShellExecute = true
+    });
+}
+catch { }
 
 app.MapControllers();
 app.Run();
