@@ -4,42 +4,46 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
-    public class StudentService(SchoolDbContext context) : IStudentService
+    public class StudentService : IStudentService
     {
-        public void Add(Student student)
+        private readonly SchoolDbContext _context;
+
+        public StudentService(SchoolDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task AddAsync(Student student)
         {
             if (student == null || student.Id != null)
-            {
                 return;
-            }
 
-            context.Students.Add(student);
-            context.SaveChanges();
+            await _context.Students.AddAsync(student);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Student student)
+        public async Task UpdateAsync(Student student)
         {
             if (student == null || student.Id == null)
-            {
                 return;
-            }
-            if (!Exists(student.Id))
-            {
+
+            if (!await ExistsAsync(student.Id))
                 return;
-            }
-            context.Students.Update(student);
-            context.SaveChanges();
+
+            _context.Students.Update(student);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int Id)
+        public async Task DeleteAsync(int id)
         {
-            context.Students.Where(s => s.Id == Id).ExecuteDelete();
-            context.SaveChanges();
+            await _context.Students
+                .Where(s => s.Id == id)
+                .ExecuteDeleteAsync();
         }
 
-        public bool Exists(int? Id)
+        public async Task<bool> ExistsAsync(int? id)
         {
-            return context.Students.Any(s => s.Id == Id);
+            return await _context.Students.AnyAsync(s => s.Id == id);
         }
     }
 }

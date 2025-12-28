@@ -6,26 +6,33 @@ namespace SchoolManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TeacherController(ITeacherservice _service) : ControllerBase
-    {   
-        [HttpPost]
-        public IActionResult Add(AddTeacherDto teacherDto) 
-        { 
-            _service.Add(teacherDto.ToModel()); 
-            return Ok(teacherDto); 
+    public class TeacherController : ControllerBase
+    {
+        private readonly ITeacherservice _service;
+
+        public TeacherController(ITeacherservice service)
+        {
+            _service = service;
         }
-        
-        [HttpPut]
-        public IActionResult Update(TeacherDto teacherDto)
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddTeacherDto teacherDto)
         {
-            _service.Update(teacherDto.ToModel());
+            await _service.AddAsync(teacherDto.ToModel());
             return Ok(teacherDto);
-        } 
-        
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(TeacherDto teacherDto)
         {
-            _service.Delete(id);
+            await _service.UpdateAsync(teacherDto.ToModel());
+            return Ok(teacherDto);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteAsync(id);
             return NoContent();
         }
     }

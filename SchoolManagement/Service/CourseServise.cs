@@ -4,73 +4,75 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
-    public class CourseService(SchoolDbContext context, ITeacherservice teacherService, IStudentService studentService) : ICourseService
+    public class CourseService : ICourseService
     {
-        public void Add(Course course)
+        private readonly SchoolDbContext _context;
+        private readonly ITeacherservice _teacherService;
+        private readonly IStudentService _studentService;
+
+        public CourseService(
+            SchoolDbContext context,
+            ITeacherservice teacherService,
+            IStudentService studentService)
+        {
+            _context = context;
+            _teacherService = teacherService;
+            _studentService = studentService;
+        }
+
+        public async Task AddAsync(Course course)
         {
             if (course == null || course.Id != null)
-            {
                 return;
-            }
-            if (!teacherService.Exists(course.TeacherId))
-            {
-                return;
-            }
-            if (!DoStudentsExist(course))
-            {
-                return;
-            }
 
-            
-            context.Courses.Add(course);
-            context.SaveChanges();
+            if (!await _teacherService.ExistsAsync(course.TeacherId))
+                return;
+
+            if (!await DoStudentsExistAsync(course))
+                return;
+
+            await _context.Courses.AddAsync(course);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Course course)
+        public async Task UpdateAsync(Course course)
         {
             if (course == null || course.Id == null)
-            {
                 return;
-            }
-            if (!Exists(course.Id))
-            {
+
+            if (!await ExistsAsync(course.Id))
                 return;
-            }
-            if (!teacherService.Exists(course.TeacherId))
-            {
+
+            if (!await _teacherService.ExistsAsync(course.TeacherId))
                 return;
-            }
-            if (!DoStudentsExist(course))
-            {
+
+            if (!await DoStudentsExistAsync(course))
                 return;
-            }
-            context.Courses.Update(course);
-            context.SaveChanges();
+
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int Id)
+        public async Task DeleteAsync(int id)
         {
-            context.Courses.Where(c => c.Id == Id).ExecuteDelete();
-            context.SaveChanges();
+            await _context.Courses
+                .Where(c => c.Id == id)
+                .ExecuteDeleteAsync();
         }
 
-        private bool Exists(int? Id)
+        private async Task<bool> ExistsAsync(int? id)
         {
-            return context.Courses.Any(c => c.Id == Id);
+            return await _context.Courses.AnyAsync(c => c.Id == id);
         }
 
-        private bool DoStudentsExist(Course course)
+        private async Task<bool> DoStudentsExistAsync(Course course)
         {
-            foreach(CourseStudent cs in course.CourseStudents)
+            foreach (var cs in course.CourseStudents)
             {
-               int studentId = cs.StudentId;
-                if (!studentService.Exists(studentId))
-                {
+                if (!await _studentService.ExistsAsync(cs.StudentId))
                     return false;
-                }
             }
             return true;
         }
     }
-
 }

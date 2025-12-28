@@ -4,42 +4,46 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
-    public class TeacherService(SchoolDbContext context) : ITeacherservice
+    public class TeacherService : ITeacherservice
     {
-        public void Add(Teacher teacher)
+        private readonly SchoolDbContext _context;
+
+        public TeacherService(SchoolDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task AddAsync(Teacher teacher)
         {
             if (teacher == null || teacher.Id != null)
-            {
                 return;
-            }
 
-            context.Teachers.Add(teacher);
-            context.SaveChanges();
+            await _context.Teachers.AddAsync(teacher);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Teacher teacher)
+        public async Task UpdateAsync(Teacher teacher)
         {
             if (teacher == null || teacher.Id == null)
-            {
                 return;
-            }
-            if (!Exists(teacher.Id))
-            {
+
+            if (!await ExistsAsync(teacher.Id))
                 return;
-            }
-            context.Teachers.Update(teacher);
-            context.SaveChanges();
+
+            _context.Teachers.Update(teacher);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int Id)
+        public async Task DeleteAsync(int id)
         {
-            context.Teachers.Where(t => t.Id == Id).ExecuteDelete();
-            context.SaveChanges();
+            await _context.Teachers
+                .Where(t => t.Id == id)
+                .ExecuteDeleteAsync();
         }
 
-        public bool Exists(int? Id)
+        public async Task<bool> ExistsAsync(int? id)
         {
-            return context.Teachers.Any(t => t.Id == Id);
+            return await _context.Teachers.AnyAsync(t => t.Id == id);
         }
     }
 }
