@@ -17,14 +17,15 @@ namespace SchoolManagement.Service
         public async Task AddAsync(Student student)
         {
             if (student == null || student.Id != null)
-                return;
+            {
+                throw new ArgumentException(" Student is null or Id is not null.");
+            };
 
             if (!string.IsNullOrEmpty(student.Email))
                 Validator.ValidateEmail(student.Email);
 
             if (!string.IsNullOrEmpty(student.PhoneNumber))
                 Validator.ValidatePhoneNumber(student.PhoneNumber);
-
 
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
@@ -33,10 +34,13 @@ namespace SchoolManagement.Service
         public async Task UpdateAsync(Student student)
         {
             if (student == null || student.Id == null)
-                return;
+            {
+                throw new ArgumentException("Student is null or Id is null.");
+            };
 
             if (!await ExistsAsync(student.Id))
                 return;
+
             if (!string.IsNullOrEmpty(student.Email))
                 Validator.ValidateEmail(student.Email);
 

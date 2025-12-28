@@ -17,7 +17,10 @@ namespace SchoolManagement.Service
         public async Task AddAsync(Teacher teacher)
         {
             if (teacher == null || teacher.Id != null)
-                return;
+            {
+                throw new ArgumentException("Teacher is null or Id is not null.");
+            }
+
             if (!string.IsNullOrEmpty(teacher.Email))
                 Validator.ValidateEmail(teacher.Email);
 
@@ -31,7 +34,9 @@ namespace SchoolManagement.Service
         public async Task UpdateAsync(Teacher teacher)
         {
             if (teacher == null || teacher.Id == null)
-                return;
+            {
+                throw new ArgumentException("Teacher is null or Id is null.");
+            }
 
             if (!await ExistsAsync(teacher.Id))
                 return;

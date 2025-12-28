@@ -23,8 +23,9 @@ namespace SchoolManagement.Service
         public async Task AddAsync(Course course)
         {
             if (course == null || course.Id != null)
-                return;
-
+            {
+                throw new ArgumentException("Course is null or Id is not null.");
+            }
             if (!await _teacherService.ExistsAsync(course.TeacherId))
                 return;
 
@@ -38,7 +39,9 @@ namespace SchoolManagement.Service
         public async Task UpdateAsync(Course course)
         {
             if (course == null || course.Id == null)
-                return;
+            {
+                throw new ArgumentException("Course is null or Id is null.");
+            }
 
             if (!await ExistsAsync(course.Id))
                 return;
