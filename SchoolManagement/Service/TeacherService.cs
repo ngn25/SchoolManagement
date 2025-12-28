@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Data;
 using SchoolManagement.Domain.Model;
+using SchoolManagement.Validation;
 
 namespace SchoolManagement.Service
 {
@@ -17,6 +18,11 @@ namespace SchoolManagement.Service
         {
             if (teacher == null || teacher.Id != null)
                 return;
+            if (!string.IsNullOrEmpty(teacher.Email))
+                Validator.ValidateEmail(teacher.Email);
+
+            if (!string.IsNullOrEmpty(teacher.PhoneNumber))
+                Validator.ValidatePhoneNumber(teacher.PhoneNumber);
 
             await _context.Teachers.AddAsync(teacher);
             await _context.SaveChangesAsync();
@@ -29,6 +35,13 @@ namespace SchoolManagement.Service
 
             if (!await ExistsAsync(teacher.Id))
                 return;
+
+            if (!string.IsNullOrEmpty(teacher.Email))
+                Validator.ValidateEmail(teacher.Email);
+
+            if (!string.IsNullOrEmpty(teacher.PhoneNumber))
+                Validator.ValidatePhoneNumber(teacher.PhoneNumber);
+
 
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
