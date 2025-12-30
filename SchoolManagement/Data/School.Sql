@@ -3,7 +3,7 @@ INSERT INTO Teachers ( Name, Email, PhoneNumber)
 VALUES 
     ( 'DrAlexander Harris', 'alexander.harris@school.edu', '09121112323'),
     ( 'ProfIsabellaMartinez', 'isabella.martinez@school.edu', '09112355566'),
-    ( 'MrJamesWilson', 'james.wilson@school.edu', '555-1103'),
+    ( 'MrJamesWilson', 'james.wilson@school.edu', '09192222255'),
     ( 'DrSophiaAnderson', 'sophia.anderson@school.edu', '09125689741'),
     ( 'MsBenjaminThomas', 'benjamin.thomas@school.edu', NULL),
     ( 'ProfOliviaJackson', 'olivia.jackson@school.edu', '09336547410'),
