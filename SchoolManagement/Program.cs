@@ -1,5 +1,4 @@
 using SchoolManagement;
-using SchoolManagement.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Service;
 using SchoolManagement.Data;

@@ -9,7 +9,7 @@ namespace SchoolManagement.Controllers
     public class CourseController : ControllerBase
     {
         private readonly ICourseService _service;
-
+   
         public CourseController(ICourseService service)
         {
             _service = service;

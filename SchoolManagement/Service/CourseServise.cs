@@ -14,7 +14,7 @@ namespace SchoolManagement.Service
             SchoolDbContext context,
             ITeacherservice teacherService,
             IStudentService studentService)
-        {
+        {   
             _context = context;
             _teacherService = teacherService;
             _studentService = studentService;
