@@ -16,7 +16,7 @@ VALUES
 INSERT INTO Students ( Name, DateOfBirth, Email, PhoneNumber)
 VALUES 
     ( 'EmmaJohnson', '2006-03-15', 'emma.j@student.com', '09135625874'),
-    ( 'LiamSmith', '2005-07-22', 'liam.s@student.com', '09125869354'),
+    ( 'LiamSmith', '2005-07-22', 'liam.s@student.com', '09125869354'),   
     ( 'NoahWilliams', '2007-01-10', 'noah.w@student.com', NULL),
     ('OliviaBrown', '2006-09-05', 'olivia.b@student.com', '09137481520'),
     ( 'EthanJones', '2005-11-30', 'ethan.j@student.com', '09124488996'),
