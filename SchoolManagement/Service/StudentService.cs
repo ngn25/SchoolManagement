@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Data;
+using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Validation;
 
@@ -14,40 +15,45 @@ namespace SchoolManagement.Service
             _context = context;
         }
 
-        public async Task AddAsync(Student student)
+        public async Task AddAsync(AddStudentDto studentdto)
         {
-            if (student == null || student.Id != null)
+            if (studentdto == null)
             {
-                throw new ArgumentException(" Student is null or Id is not null.");
-            };
+                throw new ArgumentException("studentdto is null.");
+            }
+            ;
 
-            if (!string.IsNullOrEmpty(student.Email))
-                Validator.ValidateEmail(student.Email);
 
-            if (!string.IsNullOrEmpty(student.PhoneNumber))
-                Validator.ValidatePhoneNumber(student.PhoneNumber);
+            if (!string.IsNullOrEmpty(studentdto.Email))
+                Validator.ValidateEmail(studentdto.Email);
+
+            if (!string.IsNullOrEmpty(studentdto.PhoneNumber))
+                Validator.ValidatePhoneNumber(studentdto.PhoneNumber);
+
+            Student student = studentdto.ToModel();
 
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Student student)
+        public async Task UpdateAsync(StudentDto studentdto)
         {
-            if (student == null || student.Id == null)
+            if (studentdto == null)
             {
-                throw new ArgumentException("Student is null or Id is null.");
-            };
+                throw new ArgumentException("studentdto is null.");
+            }
+            ;
 
-            if (!await ExistsAsync(student.Id))
+            if (!await ExistsAsync(studentdto.Id))
                 return;
 
-            if (!string.IsNullOrEmpty(student.Email))
-                Validator.ValidateEmail(student.Email);
+            if (!string.IsNullOrEmpty(studentdto.Email))
+                Validator.ValidateEmail(studentdto.Email);
 
-            if (!string.IsNullOrEmpty(student.PhoneNumber))
-                Validator.ValidatePhoneNumber(student.PhoneNumber);
+            if (!string.IsNullOrEmpty(studentdto.PhoneNumber))
+                Validator.ValidatePhoneNumber(studentdto.PhoneNumber);
 
-
+            Student student = studentdto.ToModel();
 
             _context.Students.Update(student);
             await _context.SaveChangesAsync();

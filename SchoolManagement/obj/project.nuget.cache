@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YpqJy4r/FIs=",
+  "dgSpecHash": "4u8Dj27TsZs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
+  "projectFilePath": "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\n.mousavi\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\n.mousavi\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

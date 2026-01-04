@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj": {}
+    "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj": {
+    "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
+        "projectUniqueName": "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
         "projectName": "SchoolManagement",
-        "projectPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
+        "projectPath": "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\SchoolManagement.csproj",
         "packagesPath": "C:\\Users\\n.mousavi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\n.mousavi\\Desktop\\schoolmanagement\\SchoolManagement\\SchoolManagement\\obj\\",
+        "outputPath": "C:\\Users\\n.mousavi\\Desktop\\SchoolManagement\\SchoolManagement\\SchoolManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\n.mousavi\\AppData\\Roaming\\NuGet\\NuGet.Config"

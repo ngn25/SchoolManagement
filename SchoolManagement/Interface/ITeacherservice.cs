@@ -1,12 +1,13 @@
+using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
     public interface ITeacherservice
     {
-        Task AddAsync(Teacher teacher);
+        Task AddAsync(AddTeacherDto teacher);
 
-        Task UpdateAsync(Teacher teacher);
+        Task UpdateAsync(TeacherDto teacher);
 
         Task DeleteAsync(int id);
 

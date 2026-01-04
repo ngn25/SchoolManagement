@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Data;
+using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
@@ -14,40 +15,44 @@ namespace SchoolManagement.Service
             SchoolDbContext context,
             ITeacherservice teacherService,
             IStudentService studentService)
-        {   
+        {
             _context = context;
             _teacherService = teacherService;
             _studentService = studentService;
         }
 
-        public async Task AddAsync(Course course)
+        public async Task AddAsync(AddCourseDto coursedto)
         {
-            if (course == null || course.Id != null)
+
+            if (coursedto == null)
             {
-                throw new ArgumentException("Course is null or Id is not null.");
+                throw new ArgumentException("coursedto is null .");
             }
-            if (!await _teacherService.ExistsAsync(course.TeacherId))
+            if (!await _teacherService.ExistsAsync(coursedto.TeacherId))
                 return;
+            Course course = coursedto.ToModel();
 
             if (!await DoStudentsExistAsync(course))
                 return;
+
 
             await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Course course)
+        public async Task UpdateAsync(CourseDto coursedto)
         {
-            if (course == null || course.Id == null)
+            if (coursedto == null)
             {
-                throw new ArgumentException("Course is null or Id is null.");
+                throw new ArgumentException("coursedto is null.");
             }
 
-            if (!await ExistsAsync(course.Id))
+            if (!await ExistsAsync(coursedto.Id))
                 return;
 
-            if (!await _teacherService.ExistsAsync(course.TeacherId))
+            if (!await _teacherService.ExistsAsync(coursedto.TeacherId))
                 return;
+            Course course = coursedto.ToModel();
 
             if (!await DoStudentsExistAsync(course))
                 return;

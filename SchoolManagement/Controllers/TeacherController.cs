@@ -18,14 +18,14 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddTeacherDto teacherDto)
         {
-            await _service.AddAsync(teacherDto.ToModel());
+            await _service.AddAsync(teacherDto);
             return Ok(teacherDto);
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(TeacherDto teacherDto)
         {
-            await _service.UpdateAsync(teacherDto.ToModel());
+            await _service.UpdateAsync(teacherDto);
             return Ok(teacherDto);
         }
 
