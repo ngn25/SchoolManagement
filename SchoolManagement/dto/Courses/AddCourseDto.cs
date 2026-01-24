@@ -5,7 +5,7 @@ namespace SchoolManagement.Domain.dto
     public class AddCourseDto
     {
      
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public int TeacherId { get; set; }
     

@@ -10,7 +10,7 @@ namespace SchoolManagement.Controllers
     public class CourseController : ControllerBase
     {
         private readonly ICourseService _service;
-   
+
         public CourseController(ICourseService service)
         {
             _service = service;
@@ -34,8 +34,7 @@ namespace SchoolManagement.Controllers
         public async Task<List<CourseDto>> GetAll()
         {
             return await _service.GetAll();
-        } 
-        
+        }
 
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)

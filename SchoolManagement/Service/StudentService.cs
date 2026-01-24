@@ -119,7 +119,7 @@ namespace SchoolManagement.Service
             {
                 CourseStudentDto courseDto = new CourseStudentDto();
                 courseDto.CourseId = course.CourseId;
-                courseDto.CourseName = course?.Course?.Name;
+                courseDto.CourseName = course.Course.Name;
                 CourseStudentDto.Add(courseDto);
             }
             return CourseStudentDto;

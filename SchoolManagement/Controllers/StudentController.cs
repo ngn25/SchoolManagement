@@ -39,6 +39,7 @@ namespace SchoolManagement.Controllers
             return await _service.GetCoursesByEmail(Email);
         }
 
+
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -33,11 +33,12 @@ namespace SchoolManagement.Controllers
             await _service.UpdateAsync(teacherDto);
             return Ok(teacherDto);
         }
-        [HttpGet("GetCourseByEmail")]
+        [HttpGet("GetCoursesByEmail")]
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
             return await _service.GetCoursesByEmail(Email);
         }
+
 
 
         [HttpDelete("Delete/{id}")]
