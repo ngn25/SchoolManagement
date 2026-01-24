@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Domain.dto;
+using SchoolManagement.Domain.Model;
 using SchoolManagement.Service;
 
 namespace SchoolManagement.Controllers
@@ -15,21 +16,28 @@ namespace SchoolManagement.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add(AddCourseDto addCourseDto)
         {
             await _service.AddAsync(addCourseDto);
             return Ok(addCourseDto);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(CourseDto courseDto)
         {
             await _service.UpdateAsync(courseDto);
             return Ok(courseDto);
         }
 
-        [HttpDelete("{id}")]
+        [HttpGet("GetAll")]
+        public async Task<List<CourseDto>> GetAll()
+        {
+            return await _service.GetAll();
+        } 
+        
+
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _service.DeleteAsync(id);

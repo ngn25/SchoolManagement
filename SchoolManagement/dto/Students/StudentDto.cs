@@ -19,6 +19,7 @@ namespace SchoolManagement.Domain.dto
                 DateOfBirth=DateOfBirth,
                 Email=Email,
                 PhoneNumber=PhoneNumber
+                
             };
         }
     }

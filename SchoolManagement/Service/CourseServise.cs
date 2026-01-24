@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using SchoolManagement.Data;
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
@@ -61,6 +62,12 @@ namespace SchoolManagement.Service
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<CourseDto>> GetAll()
+        {
+            var a = await _context.Courses.ToListAsync();
+            
+            return await Todto(a);
+        }
         public async Task DeleteAsync(int id)
         {
             await _context.Courses
@@ -82,5 +89,21 @@ namespace SchoolManagement.Service
             }
             return true;
         }
+
+        private async Task<List<CourseDto>> Todto(List<Course> courses)
+        {
+            List<CourseDto> courseDtos = [];
+
+            foreach (var course in courses)
+            {
+                CourseDto courseDto = new CourseDto();
+                courseDto.Id = course.Id;
+                courseDto.Name = course.Name;
+                courseDto.TeacherId = course.TeacherId;
+                courseDtos.Add(courseDto);
+            }
+            return courseDtos;
+        }
+
     }
 }

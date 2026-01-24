@@ -36,5 +36,6 @@ namespace SchoolManagement.Data
                 .WithMany(s => s.CourseStudents)
                 .HasForeignKey(cs => cs.StudentId);
         }
+
     }
 }

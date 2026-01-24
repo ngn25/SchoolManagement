@@ -15,21 +15,31 @@ namespace SchoolManagement.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add(AddStudentDto studentDto)
         {
             await _service.AddAsync(studentDto);
             return Ok(studentDto);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(StudentDto studentDto)
         {
             await _service.UpdateAsync(studentDto);
             return Ok(studentDto);
         }
+        [HttpGet("GetAll")]
+        public async Task<List<StudentDto>> GetAll()
+        {
+            return await _service.GetAll();
+        }
+        [HttpGet("GetCourseByEmail")]
+        public async Task<List<CourseStudentDto>> GetCoursesByEmail(string Email)
+        {
+            return await _service.GetCoursesByEmail(Email);
+        }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _service.DeleteAsync(id);

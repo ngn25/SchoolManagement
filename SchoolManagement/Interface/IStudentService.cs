@@ -1,10 +1,14 @@
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 
+
 namespace SchoolManagement.Service
 {
     public interface IStudentService
     {
+        Task<List<CourseStudentDto>> GetCoursesByEmail(string Email);
+        Task<List<StudentDto>> GetAll();
+
         Task AddAsync(AddStudentDto student);
 
         Task UpdateAsync(StudentDto student);

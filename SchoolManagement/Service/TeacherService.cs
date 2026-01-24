@@ -47,12 +47,35 @@ namespace SchoolManagement.Service
             if (!string.IsNullOrEmpty(teacherdto.Email))
                 Validator.ValidateEmail(teacherdto.Email);
 
+            if (_context.Teachers.Any(p => p.Email == teacherdto.Email))
+            {
+                throw new ArgumentException("already exist .");
+            }
+
             if (!string.IsNullOrEmpty(teacherdto.PhoneNumber))
                 Validator.ValidatePhoneNumber(teacherdto.PhoneNumber);
+            if (_context.Teachers.Any(p => p.PhoneNumber == teacherdto.PhoneNumber))
+            {
+                throw new ArgumentException("already exist .");
+            }
+
 
             Teacher teacher = teacherdto.ToModel();
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
+        }
+        public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
+        {
+            var result= await _context.Courses.Where(p=>p.Teacher.Email==Email).ToListAsync();
+            
+            return await ToDto(result);
+        }
+
+        public async Task<List<TeacherDto>> GetAll()
+        {
+            var a = await _context.Teachers.ToListAsync();
+
+            return await Todto(a);
         }
 
         public async Task DeleteAsync(int id)
@@ -60,6 +83,37 @@ namespace SchoolManagement.Service
             await _context.Teachers
                 .Where(t => t.Id == id)
                 .ExecuteDeleteAsync();
+        }
+        private async Task<List<TeacherDto>> Todto(List<Teacher> teachers)
+        {
+            List<TeacherDto> teacherDtos = [];
+
+            foreach (var teacher in teachers)
+            {
+                TeacherDto teacherDto = new TeacherDto();
+                teacherDto.Id = teacher.Id;
+                teacherDto.Name = teacher.Name;
+                teacherDto.Email = teacher.Email;
+                teacherDto.PhoneNumber = teacher.PhoneNumber;
+                teacherDtos.Add(teacherDto);
+            }
+            return teacherDtos;
+        }
+     
+
+           private async Task<List<CourseDto>> ToDto(List<Course> courses)
+        {
+            List<CourseDto> courseDtos = [];
+
+            foreach (var course in courses)
+            {
+                CourseDto courseDto = new CourseDto();
+                courseDto.Id = course.Id;
+                courseDto.Name = course.Name;
+                courseDto.TeacherId = course.TeacherId;
+                courseDtos.Add(courseDto);
+            }
+            return courseDtos;
         }
 
         public async Task<bool> ExistsAsync(int? id)

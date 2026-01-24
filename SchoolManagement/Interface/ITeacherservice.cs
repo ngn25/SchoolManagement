@@ -5,6 +5,8 @@ namespace SchoolManagement.Service
 {
     public interface ITeacherservice
     {
+        Task<List<CourseDto>> GetCoursesByEmail(string Email);
+        Task<List<TeacherDto>> GetAll();
         Task AddAsync(AddTeacherDto teacher);
 
         Task UpdateAsync(TeacherDto teacher);
