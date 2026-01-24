@@ -76,9 +76,13 @@ namespace SchoolManagement.Service
             return await Todto(a);
         }
         public async Task<List<CourseStudentDto>> GetCoursesByEmail(string Email)
+
         {
-            var studentIds= _context.Students.FirstOrDefault(p => p.Email == Email);
-            var result = await _context.CourseStudents.Include(p=>p.Course).Where(p => p.StudentId == studentIds.Id).ToListAsync();
+            if (!string.IsNullOrEmpty(Email))
+                Validator.ValidateEmail(Email);
+
+            var studentIds = _context.Students.FirstOrDefault(p => p.Email == Email);
+            var result = await _context.CourseStudents.Include(p => p.Course).Where(p => p.StudentId == studentIds.Id).ToListAsync();
             return await ToDto(result);
         }
 

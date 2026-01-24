@@ -66,6 +66,10 @@ namespace SchoolManagement.Service
         }
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
+            
+            if (!string.IsNullOrEmpty(Email))
+                Validator.ValidateEmail(Email);
+
             var result= await _context.Courses.Where(p=>p.Teacher.Email==Email).ToListAsync();
             
             return await ToDto(result);
