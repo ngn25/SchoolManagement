@@ -75,8 +75,8 @@ namespace SchoolManagement.Service
                 .ExecuteDeleteAsync();
         }
 
-        private async Task<bool> ExistsAsync(int? id)
-        {
+        private async Task<bool> ExistsAsync(int? id)                                                   
+        {                                          
             return await _context.Courses.AnyAsync(c => c.Id == id);
         }
 

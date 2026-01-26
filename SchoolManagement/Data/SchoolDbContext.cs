@@ -1,18 +1,26 @@
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Domain.Model;
-
+using Microsoft.AspNetCore.Identity;
 namespace SchoolManagement.Data
-{
-    public class SchoolDbContext(DbContextOptions<SchoolDbContext> options) : DbContext(options)
+{    public class SchoolDbContext : IdentityDbContext<IdentityUser>  
     {
-        public DbSet<Student> Students { get; set; } 
-        public DbSet<Teacher> Teachers { get; set; } 
-        public DbSet<Course> Courses { get; set; } 
-        public DbSet<CourseStudent> CourseStudents { get; set; } 
+        public SchoolDbContext(DbContextOptions<SchoolDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseStudent> CourseStudents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+     
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Course>().HasKey(c => c.Id);
             modelBuilder.Entity<Student>().HasKey(s => s.Id);
             modelBuilder.Entity<Teacher>().HasKey(t => t.Id);
@@ -36,6 +44,5 @@ namespace SchoolManagement.Data
                 .WithMany(s => s.CourseStudents)
                 .HasForeignKey(cs => cs.StudentId);
         }
-
     }
 }
