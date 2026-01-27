@@ -4,6 +4,7 @@ using SchoolManagement.Data;
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Validation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagement.Service
 {
@@ -16,6 +17,7 @@ namespace SchoolManagement.Service
             _context = context;
         }
 
+        [Authorize]
         public async Task AddAsync(AddStudentDto studentdto)
         {
             if (studentdto == null)
@@ -45,7 +47,7 @@ namespace SchoolManagement.Service
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
-
+        [Authorize]
         public async Task UpdateAsync(StudentDto studentdto)
         {
             if (studentdto == null)
@@ -69,12 +71,15 @@ namespace SchoolManagement.Service
             await _context.SaveChangesAsync();
         }
 
+        [Authorize]
         public async Task<List<StudentDto>> GetAll()
         {
             var a = await _context.Students.ToListAsync();
 
             return await Todto(a);
         }
+
+        [Authorize]
         public async Task<List<CourseStudentDto>> GetCoursesByEmail(string Email)
 
         {
@@ -86,7 +91,7 @@ namespace SchoolManagement.Service
             return await ToDto(result);
         }
 
-
+        [Authorize]
         public async Task DeleteAsync(int id)
         {
             await _context.Students

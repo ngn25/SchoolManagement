@@ -3,6 +3,8 @@ using SchoolManagement.Data;
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Validation;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SchoolManagement.Service
 {
@@ -15,6 +17,7 @@ namespace SchoolManagement.Service
             _context = context;
         }
 
+        [Authorize]
         public async Task AddAsync(AddTeacherDto teacherdto)
         {
             if (teacherdto == null)
@@ -34,6 +37,7 @@ namespace SchoolManagement.Service
             await _context.SaveChangesAsync();
         }
 
+        [Authorize]
         public async Task UpdateAsync(TeacherDto teacherdto)
         {
             if (teacherdto == null)
@@ -64,24 +68,26 @@ namespace SchoolManagement.Service
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
         }
+        [Authorize]
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
-            
+
             if (!string.IsNullOrEmpty(Email))
                 Validator.ValidateEmail(Email);
 
-            var result= await _context.Courses.Where(p=>p.Teacher.Email==Email).ToListAsync();
-            
+            var result = await _context.Courses.Where(p => p.Teacher.Email == Email).ToListAsync();
+
             return await ToDto(result);
         }
 
+        [Authorize]
         public async Task<List<TeacherDto>> GetAll()
         {
             var a = await _context.Teachers.ToListAsync();
 
             return await Todto(a);
         }
-
+        [Authorize]
         public async Task DeleteAsync(int id)
         {
             await _context.Teachers
@@ -103,9 +109,9 @@ namespace SchoolManagement.Service
             }
             return teacherDtos;
         }
-     
 
-           private async Task<List<CourseDto>> ToDto(List<Course> courses)
+
+        private async Task<List<CourseDto>> ToDto(List<Course> courses)
         {
             List<CourseDto> courseDtos = [];
 

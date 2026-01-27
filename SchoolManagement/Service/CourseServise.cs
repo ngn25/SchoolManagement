@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using SchoolManagement.Data;
@@ -6,6 +7,7 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
+
     public class CourseService : ICourseService
     {
         private readonly SchoolDbContext _context;
@@ -22,6 +24,7 @@ namespace SchoolManagement.Service
             _studentService = studentService;
         }
 
+        [Authorize]
         public async Task AddAsync(AddCourseDto coursedto)
         {
 
@@ -40,7 +43,7 @@ namespace SchoolManagement.Service
             await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
         }
-
+        [Authorize]
         public async Task UpdateAsync(CourseDto coursedto)
         {
             if (coursedto == null)
@@ -61,22 +64,22 @@ namespace SchoolManagement.Service
             _context.Courses.Update(course);
             await _context.SaveChangesAsync();
         }
-
+        [Authorize]
         public async Task<List<CourseDto>> GetAll()
         {
             var a = await _context.Courses.ToListAsync();
-            
+
             return await Todto(a);
         }
+        [Authorize]
         public async Task DeleteAsync(int id)
         {
             await _context.Courses
                 .Where(c => c.Id == id)
                 .ExecuteDeleteAsync();
         }
-
-        private async Task<bool> ExistsAsync(int? id)                                                   
-        {                                          
+        private async Task<bool> ExistsAsync(int? id)
+        {
             return await _context.Courses.AnyAsync(c => c.Id == id);
         }
 
