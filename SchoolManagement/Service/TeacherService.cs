@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagement.Service
 {
-    public class TeacherService : ITeacherservice
+    public class TeacherService : ITeacherService
     {
         private readonly SchoolDbContext _context;
 

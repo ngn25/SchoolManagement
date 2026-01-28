@@ -39,7 +39,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
-builder.Services.AddScoped<ITeacherservice, TeacherService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();

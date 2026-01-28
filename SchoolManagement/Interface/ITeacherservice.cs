@@ -3,7 +3,7 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Service
 {
-    public interface ITeacherservice
+    public interface ITeacherService
     {
         Task<List<CourseDto>> GetCoursesByEmail(string Email);
         Task<List<TeacherDto>> GetAll();
