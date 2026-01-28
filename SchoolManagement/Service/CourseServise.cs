@@ -11,12 +11,12 @@ namespace SchoolManagement.Service
     public class CourseService : ICourseService
     {
         private readonly SchoolDbContext _context;
-        private readonly ITeacherservice _teacherService;
+        private readonly ITeacherService _teacherService;
         private readonly IStudentService _studentService;
 
         public CourseService(
             SchoolDbContext context,
-            ITeacherservice teacherService,
+            ITeacherService teacherService,
             IStudentService studentService)
         {
             _context = context;

@@ -11,10 +11,13 @@ public class AuthService : IAuthService
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IConfiguration _configuration;
 
-    public AuthService(
+    public AuthService
+    (
         UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
-        IConfiguration configuration)
+        IConfiguration configuration
+    )
+    
     {
         _userManager = userManager;
         _signInManager = signInManager;
