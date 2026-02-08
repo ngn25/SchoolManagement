@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Service;
 using SchoolManagement.Domain.dto;
 using Microsoft.AspNetCore.Authorization;
+
 namespace SchoolManagement.Controllers
 {
     [ApiController]

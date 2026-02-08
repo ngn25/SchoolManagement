@@ -3,6 +3,7 @@ using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace SchoolManagement.Controllers
 {
@@ -36,6 +37,7 @@ namespace SchoolManagement.Controllers
         {
             return await _service.GetAll();
         }
+
         [Authorize]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)

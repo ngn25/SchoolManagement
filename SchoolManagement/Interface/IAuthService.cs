@@ -7,4 +7,4 @@ namespace SchoolManagement.Service
     Task<string> LoginAsync(string email, string password);
     Task RegisterAsync(string userName, string email, string password, string? phoneNumber);
 }
-}
+} 
