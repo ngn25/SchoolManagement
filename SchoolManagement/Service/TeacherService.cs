@@ -17,7 +17,7 @@ namespace SchoolManagement.Service
             _context = context;
         }
 
-        [Authorize]
+
         public async Task AddAsync(AddTeacherDto teacherdto)
         {
             if (teacherdto == null)
@@ -37,7 +37,7 @@ namespace SchoolManagement.Service
             await _context.SaveChangesAsync();
         }
 
-        [Authorize]
+
         public async Task UpdateAsync(TeacherDto teacherdto)
         {
             if (teacherdto == null)
@@ -68,7 +68,7 @@ namespace SchoolManagement.Service
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
         }
-        [Authorize]
+    
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
 
@@ -80,7 +80,6 @@ namespace SchoolManagement.Service
             return await ToDto(result);
         }
 
-        [Authorize]
         public async Task<List<TeacherDto>> GetAll()
         {
             var a = await _context.Teachers.ToListAsync();

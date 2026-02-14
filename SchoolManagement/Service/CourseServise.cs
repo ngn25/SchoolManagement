@@ -24,7 +24,7 @@ namespace SchoolManagement.Service
             _studentService = studentService;
         }
 
-        [Authorize]
+
         public async Task AddAsync(AddCourseDto coursedto)
         {
 
@@ -36,14 +36,9 @@ namespace SchoolManagement.Service
                 return;
             Course course = coursedto.ToModel();
 
-            if (!await DoStudentsExistAsync(course))
-                return;
-
-
             await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
         }
-        [Authorize]
         public async Task UpdateAsync(CourseDto coursedto)
         {
             if (coursedto == null)
@@ -58,20 +53,15 @@ namespace SchoolManagement.Service
                 return;
             Course course = coursedto.ToModel();
 
-            if (!await DoStudentsExistAsync(course))
-                return;
-
             _context.Courses.Update(course);
             await _context.SaveChangesAsync();
         }
-        [Authorize]
         public async Task<List<CourseDto>> GetAll()
         {
             var a = await _context.Courses.ToListAsync();
 
             return await Todto(a);
         }
-        [Authorize]
         public async Task DeleteAsync(int id)
         {
             await _context.Courses
@@ -81,16 +71,6 @@ namespace SchoolManagement.Service
         private async Task<bool> ExistsAsync(int? id)
         {
             return await _context.Courses.AnyAsync(c => c.Id == id);
-        }
-
-        private async Task<bool> DoStudentsExistAsync(Course course)
-        {
-            foreach (var cs in course.CourseStudents)
-            {
-                if (!await _studentService.ExistsAsync(cs.StudentId))
-                    return false;
-            }
-            return true;
         }
 
         private async Task<List<CourseDto>> Todto(List<Course> courses)
