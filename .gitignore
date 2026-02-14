@@ -1,0 +1,61 @@
+############################
+# Build results
+############################
+bin/
+obj/
+out/
+publish/
+
+############################
+# Visual Studio
+############################
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+############################
+# Rider / VS Code
+############################
+.idea/
+.vscode/
+
+############################
+# Logs
+############################
+*.log
+
+############################
+# OS files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# NuGet
+############################
+*.nupkg
+packages/
+!packages/build/
+
+############################
+# ASP.NET Core specific
+############################
+appsettings.Development.json
+appsettings.Local.json
+
+############################
+# Secrets
+############################
+secrets.json
+
+############################
+# Node (if using frontend tools)
+############################
+node_modules/
+
+############################
+# Publish output
+############################
+wwwroot/dist/
