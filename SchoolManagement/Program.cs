@@ -50,6 +50,8 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICourseStudentService, CourseStudentService>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

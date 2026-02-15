@@ -6,6 +6,6 @@ public interface ICourseStudentService
 {
     Task AddAsync(CourseStudentDto dto);
     Task RemoveAsync(CourseStudentDto dto);
-    Task<List<Course>> GetCoursesByStudentAsync(int studentId);
+    Task<List<CourseSimpleDto>> GetCoursesByStudentAsync(int studentId);
     Task<List<CourseStudentDto>> GetAllAsync();
 }
