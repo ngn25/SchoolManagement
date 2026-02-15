@@ -24,9 +24,10 @@ namespace SchoolManagement.Controllers
         }
         [Authorize]
         [HttpGet("GetAll")]
-        public async Task<List<TeacherDto>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return await _service.GetAll();
+            var result = await _service.GetAll();
+            return Ok(result);
         }
         [Authorize]
         [HttpPut("Update")]
@@ -37,9 +38,10 @@ namespace SchoolManagement.Controllers
         }
         [Authorize]
         [HttpGet("GetCoursesByEmail")]
-        public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
+        public async Task<IActionResult> GetCoursesByEmail(string Email)
         {
-            return await _service.GetCoursesByEmail(Email);
+            var result = await _service.GetCoursesByEmail(Email);
+            return Ok(result);
         }
 
 

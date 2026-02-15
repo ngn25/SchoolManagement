@@ -1,0 +1,45 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/[controller]")]
+[Authorize] 
+public class CourseStudentController : ControllerBase
+{
+    private readonly ICourseStudentService _service;
+
+    public CourseStudentController(ICourseStudentService service)
+    {
+        _service = service;
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add(CourseStudentDto dto)
+    {
+        await _service.AddAsync(dto);
+        return Ok(new { message = "Student added to course" });
+    }
+
+
+    [HttpDelete("Delete")]
+    public async Task<IActionResult> Remove(CourseStudentDto dto)
+    {
+        await _service.RemoveAsync(dto);
+        return Ok(new { message = "Student removed from course" });
+    }
+
+    [HttpGet("courses/{studentId}")]
+    public async Task<IActionResult> GetCourses(int studentId)
+    {
+        var courses = await _service.GetCoursesByStudentAsync(studentId);
+        return Ok(courses);
+    }
+
+
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAll()
+    {
+        var list = await _service.GetAllAsync();
+        return Ok(list);
+    }
+}

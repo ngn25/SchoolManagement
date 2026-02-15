@@ -2,7 +2,7 @@ using SchoolManagement.Domain.Model;
 
 namespace SchoolManagement.Domain.dto
 {
-    public class CourseStudentDto
+    public class CourseStudentsDto
     {
         public int CourseId { get; set; }
         public string CourseName { get; set; }
