@@ -47,29 +47,50 @@ namespace SchoolManagement.Service
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
-      
+
         public async Task UpdateAsync(StudentDto studentdto)
         {
             if (studentdto == null)
-            {
                 throw new ArgumentException("studentdto is null.");
-            }
-            ;
 
             if (!await ExistsAsync(studentdto.Id))
                 return;
 
             if (!string.IsNullOrEmpty(studentdto.Email))
+            {
                 Validator.ValidateEmail(studentdto.Email);
 
+                if (_context.Teachers.Any(p => p.Email == studentdto.Email))
+                {
+                    throw new ArgumentException("Email already exists among teachers.");
+                }
+
+                if (_context.Students.Any(s => s.Email == studentdto.Email && s.Id != studentdto.Id))
+                {
+                    throw new ArgumentException("Email already exists among students.");
+                }
+            }
+
             if (!string.IsNullOrEmpty(studentdto.PhoneNumber))
+            {
                 Validator.ValidatePhoneNumber(studentdto.PhoneNumber);
 
-            Student student = studentdto.ToModel();
+                if (_context.Teachers.Any(p => p.PhoneNumber == studentdto.PhoneNumber))
+                {
+                    throw new ArgumentException("Phone number already exists among teachers.");
+                }
 
+                if (_context.Students.Any(s => s.PhoneNumber == studentdto.PhoneNumber && s.Id != studentdto.Id))
+                {
+                    throw new ArgumentException("Phone number already exists among students.");
+                }
+            }
+
+            Student student = studentdto.ToModel();
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
         }
+
 
         public async Task<List<StudentDto>> GetAll()
         {
@@ -77,24 +98,24 @@ namespace SchoolManagement.Service
 
             return await Todto(a);
         }
-   public async Task<List<CourseStudentsDto>> GetCoursesByEmail(string Email)
-{
+        public async Task<List<CourseStudentsDto>> GetCoursesByEmail(string Email)
+        {
 
-    if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
-        return new List<CourseStudentsDto>();
+            if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
+                return new List<CourseStudentsDto>();
 
-    var student = await _context.Students
-        .FirstOrDefaultAsync(p => p.Email == Email);
+            var student = await _context.Students
+                .FirstOrDefaultAsync(p => p.Email == Email);
 
-    if (student == null)
-        return new List<CourseStudentsDto>(); 
-    var result = await _context.CourseStudents
-        .Include(p => p.Course)
-        .Where(p => p.StudentId == student.Id)
-        .ToListAsync();
+            if (student == null)
+                return new List<CourseStudentsDto>();
+            var result = await _context.CourseStudents
+                .Include(p => p.Course)
+                .Where(p => p.StudentId == student.Id)
+                .ToListAsync();
 
-    return await ToDto(result);
-}
+            return await ToDto(result);
+        }
 
         public async Task DeleteAsync(int id)
         {
