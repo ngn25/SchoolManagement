@@ -71,31 +71,30 @@ namespace SchoolManagement.Service
             await _context.SaveChangesAsync();
         }
 
-
         public async Task<List<StudentDto>> GetAll()
         {
             var a = await _context.Students.ToListAsync();
 
             return await Todto(a);
         }
-        public async Task<List<CourseStudentsDto>> GetCoursesByEmail(string Email)
-        {
+   public async Task<List<CourseStudentsDto>> GetCoursesByEmail(string Email)
+{
 
-            if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
-                return new List<CourseStudentsDto>();
+    if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
+        return new List<CourseStudentsDto>();
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(p => p.Email == Email);
+    var student = await _context.Students
+        .FirstOrDefaultAsync(p => p.Email == Email);
 
-            if (student == null)
-                return new List<CourseStudentsDto>();
-            var result = await _context.CourseStudents
-                .Include(p => p.Course)
-                .Where(p => p.StudentId == student.Id)
-                .ToListAsync();
+    if (student == null)
+        return new List<CourseStudentsDto>(); 
+    var result = await _context.CourseStudents
+        .Include(p => p.Course)
+        .Where(p => p.StudentId == student.Id)
+        .ToListAsync();
 
-            return await ToDto(result);
-        }
+    return await ToDto(result);
+}
 
         public async Task DeleteAsync(int id)
         {
