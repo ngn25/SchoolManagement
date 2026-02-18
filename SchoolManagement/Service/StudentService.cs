@@ -17,7 +17,7 @@ namespace SchoolManagement.Service
             _context = context;
         }
 
-        [Authorize]
+
         public async Task AddAsync(AddStudentDto studentdto)
         {
             if (studentdto == null)
@@ -47,7 +47,7 @@ namespace SchoolManagement.Service
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
-        [Authorize]
+      
         public async Task UpdateAsync(StudentDto studentdto)
         {
             if (studentdto == null)
