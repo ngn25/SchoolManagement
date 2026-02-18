@@ -41,33 +41,39 @@ namespace SchoolManagement.Service
         public async Task UpdateAsync(TeacherDto teacherdto)
         {
             if (teacherdto == null)
-            {
-                throw new ArgumentException("teacherdto is null .");
-            }
+                throw new ArgumentException("teacherdto is null.");
 
             if (!await ExistsAsync(teacherdto.Id))
                 return;
 
             if (!string.IsNullOrEmpty(teacherdto.Email))
+            {
                 Validator.ValidateEmail(teacherdto.Email);
 
-            if (_context.Teachers.Any(p => p.Email == teacherdto.Email))
-            {
-                throw new ArgumentException("already exist .");
+                if (_context.Teachers.Any(p => p.Email == teacherdto.Email && p.Id != teacherdto.Id))
+                    throw new ArgumentException("Email already exists among teachers.");
+
+                if (_context.Students.Any(s => s.Email == teacherdto.Email))
+                    throw new ArgumentException("Email already exists among students.");
             }
 
             if (!string.IsNullOrEmpty(teacherdto.PhoneNumber))
-                Validator.ValidatePhoneNumber(teacherdto.PhoneNumber);
-            if (_context.Teachers.Any(p => p.PhoneNumber == teacherdto.PhoneNumber))
             {
-                throw new ArgumentException("already exist .");
-            }
+                Validator.ValidatePhoneNumber(teacherdto.PhoneNumber);
 
+                if (_context.Teachers.Any(p => p.PhoneNumber == teacherdto.PhoneNumber && p.Id != teacherdto.Id))
+                    throw new ArgumentException("Phone number already exists among teachers.");
+
+                if (_context.Students.Any(s => s.PhoneNumber == teacherdto.PhoneNumber))
+                    throw new ArgumentException("Phone number already exists among students.");
+            }
 
             Teacher teacher = teacherdto.ToModel();
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
         }
+
+
 
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
