@@ -68,14 +68,16 @@ namespace SchoolManagement.Service
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
         }
-    
+
         public async Task<List<CourseDto>> GetCoursesByEmail(string Email)
         {
+            if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
+                return new List<CourseDto>();
 
-            if (!string.IsNullOrEmpty(Email))
-                Validator.ValidateEmail(Email);
+            var result = await _context.Courses
+                .Where(p => p.Teacher != null && p.Teacher.Email == Email)
+                .ToListAsync();
 
-            var result = await _context.Courses.Where(p => p.Teacher.Email == Email).ToListAsync();
 
             return await ToDto(result);
         }
