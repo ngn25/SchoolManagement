@@ -54,7 +54,7 @@ namespace SchoolManagement.Service
                 throw new ArgumentException("studentdto is null.");
 
             if (!await ExistsAsync(studentdto.Id))
-                return;
+               throw new KeyNotFoundException($"Teacher with ID {studentdto.Id} not found.");
 
             if (!string.IsNullOrEmpty(studentdto.Email))
             {

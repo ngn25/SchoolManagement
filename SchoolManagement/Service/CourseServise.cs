@@ -33,7 +33,9 @@ namespace SchoolManagement.Service
                 throw new ArgumentException("coursedto is null .");
             }
             if (!await _teacherService.ExistsAsync(coursedto.TeacherId))
-                return;
+            {
+                throw new KeyNotFoundException($"Teacher with ID {coursedto.TeacherId} not found.");
+            }
             Course course = coursedto.ToModel();
 
             await _context.Courses.AddAsync(course);
@@ -47,10 +49,12 @@ namespace SchoolManagement.Service
             }
 
             if (!await ExistsAsync(coursedto.Id))
-                return;
+                throw new KeyNotFoundException($"Teacher with ID {coursedto.Id} not found.");
 
             if (!await _teacherService.ExistsAsync(coursedto.TeacherId))
-                return;
+            {
+                throw new KeyNotFoundException($"Teacher with ID {coursedto.TeacherId} does not exist.");
+            }
             Course course = coursedto.ToModel();
 
             _context.Courses.Update(course);
