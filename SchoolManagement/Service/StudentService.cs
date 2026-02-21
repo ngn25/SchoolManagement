@@ -24,37 +24,48 @@ namespace SchoolManagement.Service
             {
                 throw new ArgumentException("studentdto is null.");
             }
-            ;
-
 
             if (!string.IsNullOrEmpty(studentdto.Email))
                 Validator.ValidateEmail(studentdto.Email);
-            if (_context.Teachers.Any(p => p.Email == studentdto.Email))
+
+
+            if (await _context.Students.AnyAsync(p => p.Email == studentdto.Email))
             {
-                throw new ArgumentException("already exist .");
+                throw new ArgumentException("already exist.");
+            }
+
+
+            if (await _context.Teachers.AnyAsync(p => p.Email == studentdto.Email))
+            {
+                throw new ArgumentException("already exist.");
             }
 
             if (!string.IsNullOrEmpty(studentdto.PhoneNumber))
                 Validator.ValidatePhoneNumber(studentdto.PhoneNumber);
-            if (_context.Teachers.Any(p => p.PhoneNumber == studentdto.PhoneNumber))
+
+            if (await _context.Students.AnyAsync(p => p.PhoneNumber == studentdto.PhoneNumber))
             {
-                throw new ArgumentException("already exist .");
+                throw new ArgumentException("already exist.");
             }
 
+            if (await _context.Teachers.AnyAsync(p => p.PhoneNumber == studentdto.PhoneNumber))
+            {
+                throw new ArgumentException("already exist.");
+            }
 
             Student student = studentdto.ToModel();
 
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
-
+        
         public async Task UpdateAsync(StudentDto studentdto)
         {
             if (studentdto == null)
                 throw new ArgumentException("studentdto is null.");
 
             if (!await ExistsAsync(studentdto.Id))
-               throw new KeyNotFoundException($"Teacher with ID {studentdto.Id} not found.");
+                throw new KeyNotFoundException($"Teacher with ID {studentdto.Id} not found.");
 
             if (!string.IsNullOrEmpty(studentdto.Email))
             {

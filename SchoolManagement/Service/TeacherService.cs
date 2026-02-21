@@ -21,22 +21,35 @@ namespace SchoolManagement.Service
         public async Task AddAsync(AddTeacherDto teacherdto)
         {
             if (teacherdto == null)
-            {
                 throw new ArgumentException("teacherdto is null.");
-            }
 
             if (!string.IsNullOrEmpty(teacherdto.Email))
+            {
                 Validator.ValidateEmail(teacherdto.Email);
 
+                bool emailExists = await _context.Teachers
+                    .AnyAsync(t => t.Email == teacherdto.Email);
+
+                if (emailExists)
+                    throw new Exception("Teacher with this email already exists.");
+            }
+
             if (!string.IsNullOrEmpty(teacherdto.PhoneNumber))
+            {
                 Validator.ValidatePhoneNumber(teacherdto.PhoneNumber);
+
+                bool phoneExists = await _context.Teachers
+                    .AnyAsync(t => t.PhoneNumber == teacherdto.PhoneNumber);
+
+                if (phoneExists)
+                    throw new Exception("Teacher with this phone number already exists.");
+            }
 
             Teacher teacher = teacherdto.ToModel();
 
             await _context.Teachers.AddAsync(teacher);
             await _context.SaveChangesAsync();
         }
-
 
         public async Task UpdateAsync(TeacherDto teacherdto)
         {

@@ -36,6 +36,13 @@ namespace SchoolManagement.Service
             {
                 throw new KeyNotFoundException($"Teacher with ID {coursedto.TeacherId} not found.");
             }
+            if (await _context.Courses.AnyAsync(c =>
+                 c.Name == coursedto.Name &&
+                 c.TeacherId == coursedto.TeacherId))
+            {
+                throw new ArgumentException("This teacher already has a course with the same Name.");
+            }
+
             Course course = coursedto.ToModel();
 
             await _context.Courses.AddAsync(course);

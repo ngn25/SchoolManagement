@@ -55,12 +55,16 @@ namespace SchoolManagement.Service
 
             var entity = await _context.CourseStudents
                 .FirstOrDefaultAsync(cs => cs.StudentId == dto.StudentId && cs.CourseId == dto.CourseId);
-
+            if (entity == null)
+            {
+                throw new ArgumentException("CourseStudentDto is null.");
+            }
             if (entity != null)
             {
                 _context.CourseStudents.Remove(entity);
                 await _context.SaveChangesAsync();
             }
+
         }
 
         public async Task<List<CourseSimpleDto>> GetCoursesByStudentAsync(int studentId)
