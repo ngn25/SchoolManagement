@@ -4,7 +4,7 @@ using SchoolManagement.Data;
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Validation;
-using Microsoft.AspNetCore.Authorization;
+
 
 namespace SchoolManagement.Service
 {
@@ -58,7 +58,7 @@ namespace SchoolManagement.Service
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
-        
+
         public async Task UpdateAsync(StudentDto studentdto)
         {
             if (studentdto == null)

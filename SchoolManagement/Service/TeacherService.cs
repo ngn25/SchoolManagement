@@ -3,7 +3,7 @@ using SchoolManagement.Data;
 using SchoolManagement.Domain.dto;
 using SchoolManagement.Domain.Model;
 using SchoolManagement.Validation;
-using Microsoft.AspNetCore.Authorization;
+
 
 
 namespace SchoolManagement.Service
@@ -55,7 +55,7 @@ namespace SchoolManagement.Service
         {
             if (teacherdto == null)
                 throw new ArgumentException("teacherdto is null.");
-
+ 
             if (!await ExistsAsync(teacherdto.Id))
                 throw new KeyNotFoundException($"Teacher with ID {teacherdto.Id} not found.");
 
@@ -107,7 +107,7 @@ namespace SchoolManagement.Service
 
             return await Todto(a);
         }
-        [Authorize]
+
         public async Task DeleteAsync(int id)
         {
             await _context.Teachers
