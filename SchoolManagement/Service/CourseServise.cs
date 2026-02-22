@@ -89,10 +89,12 @@ namespace SchoolManagement.Service
 
             foreach (var course in courses)
             {
-                CourseDto courseDto = new CourseDto();
-                courseDto.Id = course.Id;
-                courseDto.Name = course.Name;
-                courseDto.TeacherId = course.TeacherId;
+                CourseDto courseDto = new CourseDto
+                {
+                    Id = course.Id,
+                    Name = course.Name,
+                    TeacherId = course.TeacherId
+                };
                 courseDtos.Add(courseDto);
             }
             return courseDtos;

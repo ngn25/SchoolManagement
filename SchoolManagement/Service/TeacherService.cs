@@ -120,11 +120,13 @@ namespace SchoolManagement.Service
 
             foreach (var teacher in teachers)
             {
-                TeacherDto teacherDto = new TeacherDto();
-                teacherDto.Id = teacher.Id;
-                teacherDto.Name = teacher.Name;
-                teacherDto.Email = teacher.Email;
-                teacherDto.PhoneNumber = teacher.PhoneNumber;
+                TeacherDto teacherDto = new TeacherDto
+                {
+                    Id = teacher.Id,
+                    Name = teacher.Name,
+                    Email = teacher.Email,
+                    PhoneNumber = teacher.PhoneNumber
+                };
                 teacherDtos.Add(teacherDto);
             }
             return teacherDtos;
@@ -137,10 +139,12 @@ namespace SchoolManagement.Service
 
             foreach (var course in courses)
             {
-                CourseDto courseDto = new CourseDto();
-                courseDto.Id = course.Id;
-                courseDto.Name = course.Name;
-                courseDto.TeacherId = course.TeacherId;
+                CourseDto courseDto = new CourseDto
+                {
+                    Id = course.Id,
+                    Name = course.Name,
+                    TeacherId = course.TeacherId
+                };
                 courseDtos.Add(courseDto);
             }
             return courseDtos;

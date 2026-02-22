@@ -158,9 +158,11 @@ namespace SchoolManagement.Service
 
             foreach (var course in CourseStudent)
             {
-                CourseStudentsDto courseDto = new CourseStudentsDto();
-                courseDto.CourseId = course.CourseId;
-                courseDto.CourseName = course.Course.Name;
+                CourseStudentsDto courseDto = new CourseStudentsDto
+                {
+                    CourseId = course.CourseId,
+                    CourseName = course.Course.Name
+                };
                 CourseStudentDto.Add(courseDto);
             }
             return CourseStudentDto;
