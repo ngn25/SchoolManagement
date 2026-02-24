@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Service;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -14,7 +15,7 @@ public class CourseStudentController : ControllerBase
     }
 
     [HttpPost("add")]
-    public async Task<IActionResult> Add(CourseStudentDto dto)
+    public async Task<IActionResult> AddAsync(CourseStudentDto dto)
     {
         await _service.AddAsync(dto);
         return Ok(new { message = "Student added to course" });
@@ -22,14 +23,14 @@ public class CourseStudentController : ControllerBase
 
 
     [HttpDelete("Delete")]
-    public async Task<IActionResult> Remove(CourseStudentDto dto)
+    public async Task<IActionResult> RemoveAsync(CourseStudentDto dto)
     {
         await _service.RemoveAsync(dto);
         return Ok(new { message = "Student removed from course" });
     }
 
     [HttpGet("courses/{studentId}")]
-    public async Task<IActionResult> GetCourses(int studentId)
+    public async Task<IActionResult> GetCoursesByStudentAsync(int studentId)
     {
         var courses = await _service.GetCoursesByStudentAsync(studentId);
         return Ok(courses);
@@ -37,7 +38,7 @@ public class CourseStudentController : ControllerBase
 
 
     [HttpGet("all")]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllAsync()
     {
         var list = await _service.GetAllAsync();
         return Ok(list);

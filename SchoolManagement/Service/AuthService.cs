@@ -36,13 +36,13 @@ namespace SchoolManagement.Service
 
             if (!result.Succeeded)
                 throw new UnauthorizedAccessException("Invalid credentials");
-                
+
             if (result.Succeeded)
             {
                 await _userManager.ResetAccessFailedCountAsync(user);
             }
 
-            return GenerateToken(user);
+            return await GenerateToken(user);
         }
 
         public async Task RegisterAsync(string userName, string email, string password, string? phoneNumber)
@@ -62,31 +62,44 @@ namespace SchoolManagement.Service
 
             if (!result.Succeeded)
                 throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                await _userManager.AddToRoleAsync(user, "Student");
         }
 
 
-        private string GenerateToken(IdentityUser user)
+        private async Task<string> GenerateToken(IdentityUser user)
         {
-            var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Name, user.UserName!),
-            new Claim(ClaimTypes.Email, user.Email!),
-            new Claim(ClaimTypes.MobilePhone,user.PhoneNumber!)
-        };
+            {
+                var roles = await _userManager.GetRolesAsync(user);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Name, user.UserName!),
+        new Claim(ClaimTypes.Email, user.Email!),
+        new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? "")
+    };
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(20),
-                signingCredentials: creds
-            );
+                foreach (var role in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                var key = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!)
+                );
+
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:Issuer"],
+                    audience: _configuration["JWT:Audience"],
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(20),
+                    signingCredentials: creds
+                );
+
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
         }
     }
 

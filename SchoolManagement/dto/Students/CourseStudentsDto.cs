@@ -1,4 +1,4 @@
-using SchoolManagement.Domain.Model;
+
 
 namespace SchoolManagement.Domain.dto
 {

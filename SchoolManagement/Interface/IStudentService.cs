@@ -1,5 +1,5 @@
 using SchoolManagement.Domain.dto;
-using SchoolManagement.Domain.Model;
+
 
 
 namespace SchoolManagement.Service
