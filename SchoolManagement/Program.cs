@@ -55,7 +55,7 @@ builder.Services.AddScoped<ICourseStudentService, CourseStudentService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -87,6 +87,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    await IdentitySeeder.SeedAdminAsync(scope.ServiceProvider);
+}
 
 if (app.Environment.IsDevelopment())
 {

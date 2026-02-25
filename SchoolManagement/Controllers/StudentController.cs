@@ -15,29 +15,29 @@ namespace SchoolManagement.Controllers
         {
             _service = service;
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
         public async Task<IActionResult> Add(AddStudentDto studentDto)
         {
             await _service.AddAsync(studentDto);
             return Ok(studentDto);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
         public async Task<IActionResult> Update(StudentDto studentDto)
         {
             await _service.UpdateAsync(studentDto);
             return Ok(studentDto);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();
             return Ok(result);
         }
-        [Authorize]
 
+        [Authorize(Roles = "Admin,Student")]
         [HttpGet("GetCourseByEmail")]
         public async Task<IActionResult> GetCoursesByEmail(string Email)
         {
@@ -45,7 +45,7 @@ namespace SchoolManagement.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

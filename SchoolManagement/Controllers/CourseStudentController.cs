@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] 
+[Authorize]
 public class CourseStudentController : ControllerBase
 {
     private readonly ICourseStudentService _service;
@@ -13,7 +13,7 @@ public class CourseStudentController : ControllerBase
     {
         _service = service;
     }
-
+    [Authorize(Roles = "Admin,Teacher")]
     [HttpPost("add")]
     public async Task<IActionResult> AddAsync(CourseStudentDto dto)
     {
@@ -21,7 +21,7 @@ public class CourseStudentController : ControllerBase
         return Ok(new { message = "Student added to course" });
     }
 
-
+    [Authorize(Roles = "Admin,Teacher")]
     [HttpDelete("Delete")]
     public async Task<IActionResult> RemoveAsync(CourseStudentDto dto)
     {
@@ -29,6 +29,7 @@ public class CourseStudentController : ControllerBase
         return Ok(new { message = "Student removed from course" });
     }
 
+    [Authorize(Roles = "Student,Teacher,Admin")]
     [HttpGet("courses/{studentId}")]
     public async Task<IActionResult> GetCoursesByStudentAsync(int studentId)
     {
@@ -36,7 +37,7 @@ public class CourseStudentController : ControllerBase
         return Ok(courses);
     }
 
-
+    [Authorize(Roles = "Admin")]
     [HttpGet("all")]
     public async Task<IActionResult> GetAllAsync()
     {
